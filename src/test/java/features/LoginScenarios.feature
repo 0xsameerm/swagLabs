@@ -31,4 +31,3 @@ Feature: To check the Login functionality
       |username|password|
       |sssss|secret_sauce|
 
-    Scenario Outline: Verify logout functionality

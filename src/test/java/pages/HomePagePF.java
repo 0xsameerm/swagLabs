@@ -6,17 +6,27 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class HomePagePF{
-    WebDriver driver;
+import javax.xml.xpath.XPath;
+
+public class HomePagePF extends BasePage{
 
     @FindBy(xpath ="//button[@id='react-burger-menu-btn']")
-    WebElement hamburgerIcon;
+    private WebElement hamburgerIcon;
 
     @FindBy(xpath = "//*[@id='logout_sidebar_link']")
-    WebElement logoutBtn;
+    private WebElement logoutBtn;
+
+    @FindBy(id = "add-to-cart-sauce-labs-backpack")
+    private WebElement backpack_addtocartbtn;
+
+    @FindBy(xpath = "//*[@id='shopping_cart_container']/a/span")
+    private WebElement cartNumber;
+
+    @FindBy(xpath = "//*[@id='shopping_cart_container']/a")
+    private WebElement cartBtn;
 
     public HomePagePF(WebDriver driver){
-        this.driver=driver;
+        super(driver);
         PageFactory.initElements(driver,this);
     }
 
@@ -29,5 +39,15 @@ public class HomePagePF{
     }
 
 
+    public WebElement getBackpackCartbtn(){
+        return backpack_addtocartbtn;
+    }
 
+    public WebElement getCartNumber(){
+        return cartNumber;
+    }
+
+    public WebElement getCartBtn(){
+        return cartBtn;
+    }
 }
