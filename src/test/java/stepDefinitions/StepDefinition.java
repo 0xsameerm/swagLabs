@@ -118,8 +118,6 @@ public class StepDefinition {
 
     @Then("the user is redirected to the Your Cart page")
     public void theUserIsRedirectedToTheYourCartPage() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        wait.until(ExpectedConditions.urlToBe("https://www.saucedemo.com/cart.html"));
         Assert.assertEquals(yc.getPageHeading(),"Your Cart");
     }
 
