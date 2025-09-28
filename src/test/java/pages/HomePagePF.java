@@ -19,7 +19,7 @@ public class HomePagePF extends BasePage{
     @FindBy(id = "add-to-cart-sauce-labs-backpack")
     private WebElement backpack_addtocartbtn;
 
-    @FindBy(className = "shopping_cart_badge")
+    @FindBy(xpath = "//*[@class='shopping_cart_badge']")
     private WebElement cartNumber;
 
     @FindBy(xpath = "//*[@id='shopping_cart_container']/a")
