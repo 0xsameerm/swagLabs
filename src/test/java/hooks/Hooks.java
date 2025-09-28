@@ -15,9 +15,12 @@ public class Hooks {
     public void setup(){
         WebDriverManager.edgedriver().setup();
         EdgeOptions options = new EdgeOptions();
-        options.addArguments("--headless");
+        options.addArguments("--headless=new");
+        options.addArguments("--disable-gpu");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--remote-allow-origins=*");
+
         driver=new EdgeDriver(options);
         driver.manage().window().maximize();
     }
