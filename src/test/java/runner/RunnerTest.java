@@ -12,5 +12,5 @@ import org.junit.runner.RunWith;
         plugin ={"pretty","io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"},
         monochrome = true
 )
-public class Runner {
+public class RunnerTest {
 }
