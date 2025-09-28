@@ -106,6 +106,8 @@ public class StepDefinition {
 
     @Then("{string} is displayed in the cart")
     public void isDisplayedInTheCart(String cartnumber){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOf(hp.getCartBtn()));
         Assert.assertTrue(hp.getCartNumber().getText().contains(cartnumber));
     }
 
