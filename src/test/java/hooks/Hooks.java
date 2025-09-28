@@ -4,6 +4,8 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 
@@ -13,15 +15,26 @@ public class Hooks {
 
     @Before
     public void setup(){
-        WebDriverManager.edgedriver().setup();
-        EdgeOptions options = new EdgeOptions();
-        options.addArguments("--headless=new");
-        options.addArguments("--disable-gpu");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--remote-allow-origins=*");
+        boolean isCI = System.getenv("JENKINS_HOME") != null || System.getenv("CI") != null;
 
-        driver=new EdgeDriver(options);
+        if (isCI) {
+            WebDriverManager.chromedriver().setup();
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--headless=new");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--disable-gpu");
+            options.addArguments("--remote-allow-origins=*");
+            driver = new ChromeDriver(options);
+
+        } else {
+            // 💻 Use Edge locally (non-he
+            WebDriverManager.edgedriver().setup();
+            EdgeOptions options = new EdgeOptions();
+            options.addArguments("--start-maximized");
+            driver = new EdgeDriver(options);
+        }
+
         driver.manage().window().maximize();
     }
 
