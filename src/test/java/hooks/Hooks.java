@@ -2,6 +2,7 @@ package hooks;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 
@@ -11,6 +12,7 @@ public class Hooks {
 
     @Before
     public void setup(){
+        WebDriverManager.edgedriver().setup();
         driver=new EdgeDriver();
         driver.manage().window().maximize();
     }
