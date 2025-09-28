@@ -13,7 +13,7 @@ public class HomePagePF extends BasePage{
     @FindBy(xpath ="//button[@id='react-burger-menu-btn']")
     private WebElement hamburgerIcon;
 
-    @FindBy(xpath = "//*[@id='logout_sidebar_link']")
+    @FindBy(id ="logout_sidebar_link")
     private WebElement logoutBtn;
 
     @FindBy(id = "add-to-cart-sauce-labs-backpack")

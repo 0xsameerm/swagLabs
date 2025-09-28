@@ -7,8 +7,10 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -78,15 +80,16 @@ public class StepDefinition {
     @And("clicks on logout button")
     public void clicksOnLogoutButton() throws InterruptedException {
      try {
-         hp.getLogoutBtn().click();
+         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", hp.getLogoutBtn());
      }catch(ElementNotInteractableException e){
-         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+         wait.until(ExpectedConditions.elementToBeClickable(hp.getLogoutBtn()));
      }
     }
 
     @Then("user is navigated to the login page")
     public void userIsNavigatedToTheLoginPage() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.urlToBe("https://www.saucedemo.com/"));
         Assert.assertEquals(lp.getPageURL(),"https://www.saucedemo.com/");
     }
@@ -113,6 +116,8 @@ public class StepDefinition {
 
     @Then("the user is redirected to the Your Cart page")
     public void theUserIsRedirectedToTheYourCartPage() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.urlToBe("https://www.saucedemo.com/cart.html"));
         Assert.assertEquals(yc.getPageHeading(),"Your Cart");
     }
 
