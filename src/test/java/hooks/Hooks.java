@@ -28,7 +28,6 @@ public class Hooks {
             driver = new ChromeDriver(options);
 
         } else {
-            // 💻 Use Edge locally (non-he
             WebDriverManager.edgedriver().setup();
             EdgeOptions options = new EdgeOptions();
             options.addArguments("--start-maximized");
