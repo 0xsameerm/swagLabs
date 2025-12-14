@@ -31,6 +31,7 @@ public class Hooks {
             WebDriverManager.edgedriver().setup();
             EdgeOptions options = new EdgeOptions();
             options.addArguments("--start-maximized");
+            options.addArguments("--remote-allow-origins=*");
             driver = new EdgeDriver(options);
         }
 

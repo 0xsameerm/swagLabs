@@ -10,7 +10,6 @@ import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -20,7 +19,7 @@ import pages.*;
 import java.time.Duration;
 
 
-public class StepDefinition {
+public class PurchaseSingleItemSteps {
     WebDriver driver;
     LoginPage lp;
     HomePagePF hp;
@@ -29,7 +28,7 @@ public class StepDefinition {
     CheckoutOverview co;
     CheckoutComplete cc;
 
-    public StepDefinition(){
+    public PurchaseSingleItemSteps(){
         this.driver = Hooks.getDriver();
         lp=new LoginPage(driver);
         hp=new HomePagePF(driver);
@@ -37,61 +36,6 @@ public class StepDefinition {
         cyi=new CheckoutYourInformation(driver);
         co=new CheckoutOverview(driver);
         cc=new CheckoutComplete(driver);
-    }
-
-    @Given("user is on the swag labs login page")
-    public void user_is_on_the_swag_labs_login_page() {
-        driver.get("https://www.saucedemo.com/");
-    }
-    @When("user enters the username {string}")
-    public void user_enters_the_username(String username) {
-    lp.enterUsername(username);
-    }
-    @When("user enters the password {string}")
-    public void user_enters_the_password(String password) {
-    lp.enterPassword(password);
-    }
-    @When("clicks on login button")
-    public void clicks_on_login_button() {
-    lp.clickLoginBtn();
-    }
-
-    @Then("user is navigated to the home page")
-    public void user_is_navigated_to_the_home_page() {
-         Assert.assertEquals(hp.getPageTitle(),"Swag Labs");
-    }
-
-    @Then("an error message is displayed")
-    public void anErrorMessageIsDisplayed() {
-    Assert.assertTrue(lp.getErrorMessage());
-    }
-
-    @When("user enters the {string} and {string}")
-    public void userEntersTheUsernameAndPassword(String username,String password) {
-        lp.enterUsername(username);
-        lp.enterPassword(password);
-    }
-
-    @When("user clicks on Hamburger icon")
-    public void userClicksOnHamburgerIcon() {
-        hp.getHamburgerIcon().click();
-    }
-
-    @And("clicks on logout button")
-    public void clicksOnLogoutButton() throws InterruptedException {
-     try {
-         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", hp.getLogoutBtn());
-     }catch(ElementNotInteractableException e){
-         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-         wait.until(ExpectedConditions.elementToBeClickable(hp.getLogoutBtn()));
-     }
-    }
-
-    @Then("user is navigated to the login page")
-    public void userIsNavigatedToTheLoginPage() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        wait.until(ExpectedConditions.urlToBe("https://www.saucedemo.com/"));
-        Assert.assertEquals(lp.getPageURL(),"https://www.saucedemo.com/");
     }
 
     @Given("user is on the home page")
