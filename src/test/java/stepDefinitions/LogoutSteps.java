@@ -48,5 +48,4 @@ public class LogoutSteps {
         wait.until(ExpectedConditions.urlToBe("https://www.saucedemo.com/"));
         Assert.assertEquals(lp.getPageURL(),"https://www.saucedemo.com/");
     }
-
 }

@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import javax.xml.xpath.XPath;
+import java.util.List;
 
 public class HomePagePF extends BasePage{
 
@@ -24,6 +25,9 @@ public class HomePagePF extends BasePage{
 
     @FindBy(xpath = "//*[@id='shopping_cart_container']/a")
     private WebElement cartBtn;
+
+    @FindBy(xpath = "//*[text() = 'Add to cart']")
+    private List<WebElement> addtocartbtns;
 
     public HomePagePF(WebDriver driver){
         super(driver);
@@ -50,4 +54,15 @@ public class HomePagePF extends BasePage{
     public WebElement getCartBtn(){
         return cartBtn;
     }
+
+    public int getItemCount(){
+        return Integer.parseInt(getCartNumber().getText());
+    }
+
+    public void addItemsToCart(int count){
+        for(int i=1;i<=count;i++){
+            addtocartbtns.get(i).click();
+        }
+    }
+
 }
