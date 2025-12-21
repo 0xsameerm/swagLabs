@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import javax.xml.xpath.XPath;
 import java.util.List;
 
 public class HomePagePF extends BasePage{
@@ -20,14 +19,14 @@ public class HomePagePF extends BasePage{
     @FindBy(id = "add-to-cart-sauce-labs-backpack")
     private WebElement backpack_addtocartbtn;
 
-    @FindBy(xpath = "//*[@class='shopping_cart_badge']")
-    private WebElement cartNumber;
+    private By cartNumber = By.xpath("//*[@class='shopping_cart_badge']");
 
     @FindBy(xpath = "//*[@id='shopping_cart_container']/a")
     private WebElement cartBtn;
 
-    @FindBy(xpath = "//*[text() = 'Add to cart']")
-    private List<WebElement> addtocartbtns;
+    private By addtocartBtns = By.xpath("//*[text() = 'Add to cart']");
+
+    private By removeBtns = By.xpath("//*[text()='Remove']");
 
     public HomePagePF(WebDriver driver){
         super(driver);
@@ -47,7 +46,7 @@ public class HomePagePF extends BasePage{
         return backpack_addtocartbtn;
     }
 
-    public WebElement getCartNumber(){
+    public By getCartNumber(){
         return cartNumber;
     }
 
@@ -56,13 +55,24 @@ public class HomePagePF extends BasePage{
     }
 
     public int getItemCount(){
-        return Integer.parseInt(getCartNumber().getText());
+            List<WebElement> badge = driver.findElements(cartNumber);
+
+            if (badge.isEmpty()) {
+                return 0;
+            }
+
+            return Integer.parseInt(badge.getFirst().getText());
     }
 
     public void addItemsToCart(int count){
-        for(int i=1;i<=count;i++){
-            addtocartbtns.get(i).click();
+        for(int i=0;i<count;i++){
+            driver.findElements(addtocartBtns).getFirst().click();
         }
     }
 
+    public void removeItemsFromCart(int count) {
+        for (int i=0; i<count; i++) {
+            driver.findElements(removeBtns).getFirst().click();
+        }
+    }
 }

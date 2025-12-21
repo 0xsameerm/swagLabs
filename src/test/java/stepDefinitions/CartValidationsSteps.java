@@ -29,4 +29,15 @@ public class CartValidationsSteps {
         Assert.assertEquals(hp.getItemCount(),itemCount);
         //System.out.println(hp.getItemCount());
     }
+
+
+    @Then("remove {int} items from cart")
+    public void removeRemovecountItemsFromCart(int count) {
+
+                hp.removeItemsFromCart(count);
+                itemCount = itemCount - count;
+                Assert.assertEquals(hp.getItemCount(), itemCount);
+
+        System.out.println(hp.getItemCount());
+    }
 }

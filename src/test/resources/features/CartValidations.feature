@@ -6,11 +6,13 @@ Feature: Cart Validations
     And user enters the password "secret_sauce"
     And clicks on login button
 
-    Scenario Outline: To add multiple items to cart and verify the count
+    Scenario Outline: To add and remove multiple items to cart and verify the count
       Given user is on the home page
-      And adds <count> items to cart
+      And adds <addcount> items to cart
+      Then cart badge should display the number of items in the cart correctly
+      Then remove <removecount> items from cart
       Then cart badge should display the number of items in the cart correctly
 
       Examples:
-      | count |
-      | 3     |
+      | addcount ||removecount|
+      | 3        ||3          |

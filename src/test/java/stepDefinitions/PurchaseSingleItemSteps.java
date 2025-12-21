@@ -10,6 +10,7 @@ import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -51,8 +52,8 @@ public class PurchaseSingleItemSteps {
     @Then("{string} is displayed in the cart")
     public void isDisplayedInTheCart(String cartnumber){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        wait.until(ExpectedConditions.visibilityOf(hp.getCartNumber()));
-        Assert.assertTrue(hp.getCartNumber().getText().contains(cartnumber));
+        wait.until(ExpectedConditions.visibilityOf((WebElement) hp.getCartNumber()));
+        Assert.assertTrue(((WebElement) hp.getCartNumber()).getText().contains(cartnumber));
     }
 
     @When("user clicks on cart icon on top right of the page")
