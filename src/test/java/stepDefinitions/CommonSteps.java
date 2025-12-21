@@ -5,6 +5,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import pages.HomePagePF;
@@ -46,5 +47,11 @@ public class CommonSteps {
     @Then("user is navigated to the home page")
     public void user_is_navigated_to_the_home_page() {
         Assert.assertEquals(hp.getPageTitle(),"Swag Labs");
+    }
+
+    @Then("scrolls down the page")
+    public void scrollsDownThePage() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0,document.body.scrollHeight)");
     }
 }

@@ -28,6 +28,15 @@ public class HomePagePF extends BasePage{
 
     private By removeBtns = By.xpath("//*[text()='Remove']");
 
+    @FindBy(xpath = "//*[text()='Twitter']")
+    private WebElement twitterLogo;
+
+    @FindBy(xpath = "//*[text()='Facebook']")
+    private WebElement facebookLogo;
+
+    @FindBy(xpath = "//*[text() = 'LinkedIn']")
+    private WebElement linkedInLogo;
+
     public HomePagePF(WebDriver driver){
         super(driver);
         PageFactory.initElements(driver,this);
@@ -74,5 +83,17 @@ public class HomePagePF extends BasePage{
         for (int i=0; i<count; i++) {
             driver.findElements(removeBtns).getFirst().click();
         }
+    }
+
+    public WebElement getTwitterLogo(){
+        return twitterLogo;
+    }
+
+    public WebElement getFacebookLogo(){
+        return facebookLogo;
+    }
+
+    public WebElement getLinkedInLogo(){
+        return linkedInLogo;
     }
 }
